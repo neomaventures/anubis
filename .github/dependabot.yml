@@ -1,0 +1,51 @@
+version: 2
+updates:
+  # Root package dependencies (devDependencies, testing tools, etc.)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    # Group all minor and patch updates together
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    # Keep major updates separate for careful review
+    open-pull-requests-limit: 5
+    # Uncomment to auto-assign reviewer for dependency updates
+    # reviewers:
+    #   - "dannybster"
+    # labels:
+    #   - "dependencies"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # Library package dependencies (actual published package dependencies)
+  - package-ecosystem: "npm"
+    directory: "/libs/package-template"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    # Group all minor and patch updates together
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    # Keep major updates separate for careful review
+    open-pull-requests-limit: 5
+    # Uncomment to auto-assign reviewer for dependency updates
+    # reviewers:
+    #   - "dannybster"
+    # labels:
+    #   - "dependencies"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
