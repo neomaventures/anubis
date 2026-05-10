@@ -8,29 +8,29 @@ Template for creating new Neoma packages with consistent structure, configuratio
 
 ```bash
 cd /path/to/wulfstack/packages
-cp -r neoma-package-template neoma-<your-package-name>
+cp -r neoma-anubis neoma-<your-package-name>
 cd neoma-<your-package-name>
 ```
 
 ### 2. Replace placeholders
 
 Search and replace throughout the project:
-- `{{PACKAGE_NAME}}` → Your package name (e.g., "garmr", "validation")
-- `{{PACKAGE_DESCRIPTION}}` → Short description
-- `{{REPO_URL}}` → GitHub repository URL (e.g., "https://github.com/shipdventures/neoma-garmr")
+- `anubis` → Your package name (e.g., "garmr", "validation")
+- `NestJS module for historical currency conversion using ECB reference rates (1999–present).` → Short description
+- `https://github.com/neomaventures/anubis` → GitHub repository URL (e.g., "https://github.com/shipdventures/neoma-garmr")
 
 **Quick find/replace:**
 ```bash
 # macOS/Linux
-find . -type f -name "*.json" -o -name "*.md" -o -name "*.ts" | xargs sed -i '' 's/{{PACKAGE_NAME}}/your-package-name/g'
-find . -type f -name "*.json" -o -name "*.md" -o -name "*.ts" | xargs sed -i '' 's/{{PACKAGE_DESCRIPTION}}/Your description/g'
-find . -type f -name "*.json" -o -name "*.md" -o -name "*.ts" | xargs sed -i '' 's|{{REPO_URL}}|https://github.com/your-org/your-repo|g'
+find . -type f -name "*.json" -o -name "*.md" -o -name "*.ts" | xargs sed -i '' 's/anubis/your-package-name/g'
+find . -type f -name "*.json" -o -name "*.md" -o -name "*.ts" | xargs sed -i '' 's/NestJS module for historical currency conversion using ECB reference rates (1999–present)./Your description/g'
+find . -type f -name "*.json" -o -name "*.md" -o -name "*.ts" | xargs sed -i '' 's|https://github.com/neomaventures/anubis|https://github.com/your-org/your-repo|g'
 ```
 
 ### 3. Rename directories
 
 ```bash
-mv libs/package-template libs/your-package-name
+mv libs/anubis libs/your-package-name
 ```
 
 ### 4. Install dependencies
@@ -103,13 +103,13 @@ neoma-<package-name>/
 - Fast feedback loop
 - Test edge cases and error handling
 
-**Example**: The template includes `libs/package-template/src/modules/example.module.spec.ts` showing how to test NestJS modules.
+**Example**: The template includes `libs/anubis/src/modules/example.module.spec.ts` showing how to test NestJS modules.
 
 ### Complete Testing Flow
 
-1. **Write library code** in `libs/package-template/src/`
+1. **Write library code** in `libs/anubis/src/`
 2. **Write unit tests** alongside your code (`*.spec.ts`)
-3. **Export from** `libs/package-template/src/index.ts`
+3. **Export from** `libs/anubis/src/index.ts`
 4. **Import in** `src/app.module.ts` for E2E testing
 5. **Write E2E tests** in `specs/` to validate integration
 

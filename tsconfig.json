@@ -17,8 +17,8 @@
     "types": ["node", "jest"],
     "paths": {
       "fixtures/*": ["${configDir}/fixtures/*"],
-      "@lib": ["${configDir}/libs/package-template/src"],
-      "@lib/*": ["${configDir}/libs/package-template/src/*"]
+      "@lib": ["${configDir}/libs/anubis/src"],
+      "@lib/*": ["${configDir}/libs/anubis/src/*"]
     }
   }
 }
