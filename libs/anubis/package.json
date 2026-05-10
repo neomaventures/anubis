@@ -1,19 +1,19 @@
 {
-  "name": "@neoma/package-template",
+  "name": "@neoma/anubis",
   "version": "0.1.0",
-  "description": "{{PACKAGE_DESCRIPTION}}",
+  "description": "NestJS module for historical currency conversion using ECB reference rates (1999–present).",
   "author": "Shipdventures",
   "repository": {
     "type": "git",
-    "url": "{{REPO_URL}}"
+    "url": "https://github.com/neomaventures/anubis"
   },
   "bugs": {
-    "url": "{{REPO_URL}}/issues"
+    "url": "https://github.com/neomaventures/anubis/issues"
   },
-  "homepage": "{{REPO_URL}}#readme",
+  "homepage": "https://github.com/neomaventures/anubis#readme",
   "keywords": [
     "nestjs",
-    "package-template",
+    "anubis",
     "laravel",
     "neoma"
   ],
