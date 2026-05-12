@@ -8,7 +8,7 @@
   },
   "moduleNameMapper": {
     "fixtures/(.*)$": "<rootDir>/../fixtures/$1",
-    "@lib/(.*)$": "<rootDir>/../libs/package-template/src/$1",
-    "@lib": "<rootDir>/../libs/package-template/src"
+    "@lib/(.*)$": "<rootDir>/../libs/anubis/src/$1",
+    "@lib": "<rootDir>/../libs/anubis/src"
   }
 }

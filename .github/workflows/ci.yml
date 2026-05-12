@@ -43,7 +43,7 @@ jobs:
 
       - name: Test publish structure
         run: |
-          cd libs/package-template
+          cd libs/anubis
           npm publish --dry-run
 
   publish:
@@ -69,7 +69,7 @@ jobs:
 
       - name: Publish to npm
         run: |
-          cd libs/package-template
+          cd libs/anubis
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
