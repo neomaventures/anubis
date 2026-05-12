@@ -49,7 +49,7 @@ jobs:
   publish:
     needs: test
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v') && github.repository != 'shipdventures/neoma-package-template'
+    if: startsWith(github.ref, 'refs/tags/v') && github.repository != 'neomaventures/anubis'
 
     steps:
       - uses: actions/checkout@v4

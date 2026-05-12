@@ -4,7 +4,7 @@
     "node": ">=22.0.0"
   },
   "version": "0.4.2",
-  "description": "",
+  "description": "NestJS module for historical currency conversion using ECB reference rates (1999–present).",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
