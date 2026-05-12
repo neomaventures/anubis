@@ -32,6 +32,16 @@ describe("EcbHistFetcher", () => {
         expect(Buffer.isBuffer(result)).toBe(true)
         expect(result.length).toBe(fixtureBuffer.length)
       })
+
+      it("should NOT call globalThis.fetch", async () => {
+        const fetchSpy = jest.spyOn(globalThis, "fetch")
+
+        await fetcher.fetch(fixtureUrl)
+
+        expect(fetchSpy).not.toHaveBeenCalled()
+
+        fetchSpy.mockRestore()
+      })
     })
 
     describe("Given an https:// URL", () => {
