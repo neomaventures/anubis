@@ -22,11 +22,13 @@ const fixtureZip = pathToFileURL(
       synchronize: true,
     }),
     TypeOrmModule.forFeature([ExchangeRate]),
-    AnubisModule.forRoot({
-      ratesUrl: fixtureZip,
-      entity: ExchangeRate,
+    AnubisModule.forRootAsync({
+      useFactory: () => ({
+        ratesUrl: fixtureZip,
+        entity: ExchangeRate,
+      }),
     }),
   ],
   controllers: [AppController],
 })
-export class AppModule {}
+export class AsyncAppModule {}

@@ -43,13 +43,13 @@ jobs:
 
       - name: Test publish structure
         run: |
-          cd libs/package-template
+          cd libs/anubis
           npm publish --dry-run
 
   publish:
     needs: test
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v') && github.repository != 'shipdventures/neoma-package-template'
+    if: startsWith(github.ref, 'refs/tags/v') && github.repository != 'neomaventures/anubis'
 
     steps:
       - uses: actions/checkout@v4
@@ -69,7 +69,7 @@ jobs:
 
       - name: Publish to npm
         run: |
-          cd libs/package-template
+          cd libs/anubis
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

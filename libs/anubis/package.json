@@ -1,0 +1,49 @@
+{
+  "name": "@neoma/anubis",
+  "version": "0.1.0",
+  "description": "Historical ECB-based currency conversion module for NestJS",
+  "author": "Shipdventures",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neomaventures/anubis"
+  },
+  "bugs": {
+    "url": "https://github.com/neomaventures/anubis/issues"
+  },
+  "homepage": "https://github.com/neomaventures/anubis#readme",
+  "keywords": [
+    "nestjs",
+    "anubis",
+    "currency",
+    "ecb",
+    "neoma"
+  ],
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublishOnly": "cp ../../README.md ../../LICENSE ."
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "!**/*.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "decimal.js": "^10.4.3"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "11.x",
+    "@nestjs/event-emitter": "3.x",
+    "@nestjs/core": "11.x",
+    "@nestjs/schedule": "5.x",
+    "@nestjs/typeorm": "11.x",
+    "reflect-metadata": ">=0.2",
+    "rxjs": ">=7",
+    "typeorm": ">=0.3"
+  }
+}

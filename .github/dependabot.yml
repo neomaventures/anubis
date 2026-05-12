@@ -27,7 +27,7 @@ updates:
 
   # Library package dependencies (actual published package dependencies)
   - package-ecosystem: "npm"
-    directory: "/libs/package-template"
+    directory: "/libs/anubis"
     schedule:
       interval: "weekly"
       day: "monday"
