@@ -38,6 +38,7 @@
   },
   "peerDependencies": {
     "@nestjs/common": "11.x",
+    "@nestjs/event-emitter": "3.x",
     "@nestjs/core": "11.x",
     "@nestjs/schedule": "5.x",
     "@nestjs/typeorm": "11.x",

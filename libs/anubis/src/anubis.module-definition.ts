@@ -1,4 +1,5 @@
 import { ConfigurableModuleBuilder } from "@nestjs/common"
+import { EventEmitterModule } from "@nestjs/event-emitter"
 import { ScheduleModule } from "@nestjs/schedule"
 
 import { type AnubisOptions, ANUBIS_OPTIONS } from "./anubis.options"
@@ -19,7 +20,11 @@ export const {
   .setExtras({}, (definition) => ({
     ...definition,
     global: true,
-    imports: [ScheduleModule.forRoot(), ...(definition.imports ?? [])],
+    imports: [
+      EventEmitterModule.forRoot(),
+      ScheduleModule.forRoot(),
+      ...(definition.imports ?? []),
+    ],
     providers: [...(definition.providers ?? []), ...ANUBIS_PROVIDERS],
     exports: [
       ...(definition.exports ?? []),

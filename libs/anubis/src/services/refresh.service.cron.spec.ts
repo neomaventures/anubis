@@ -1,6 +1,7 @@
 import { resolve } from "node:path"
 import { pathToFileURL } from "node:url"
 
+import { EventEmitterModule } from "@nestjs/event-emitter"
 import { ScheduleModule, SchedulerRegistry } from "@nestjs/schedule"
 import { Test } from "@nestjs/testing"
 import { TypeOrmModule } from "@nestjs/typeorm"
@@ -52,6 +53,7 @@ describe("RefreshService (cron)", () => {
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       imports: [
+        EventEmitterModule.forRoot(),
         ScheduleModule.forRoot(),
         TypeOrmModule.forRoot({
           type: "sqlite",
