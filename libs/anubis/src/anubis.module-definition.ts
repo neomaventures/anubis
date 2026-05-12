@@ -1,4 +1,5 @@
 import { ConfigurableModuleBuilder } from "@nestjs/common"
+import { ScheduleModule } from "@nestjs/schedule"
 
 import { type AnubisOptions, ANUBIS_OPTIONS } from "./anubis.options"
 import { CurrencyConversionService } from "./services/currency-conversion.service"
@@ -18,6 +19,7 @@ export const {
   .setExtras({}, (definition) => ({
     ...definition,
     global: true,
+    imports: [ScheduleModule.forRoot(), ...(definition.imports ?? [])],
     providers: [...(definition.providers ?? []), ...ANUBIS_PROVIDERS],
     exports: [
       ...(definition.exports ?? []),

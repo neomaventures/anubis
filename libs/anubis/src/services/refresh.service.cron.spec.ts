@@ -1,6 +1,7 @@
 import { resolve } from "node:path"
 import { pathToFileURL } from "node:url"
 
+import { ScheduleModule, SchedulerRegistry } from "@nestjs/schedule"
 import { Test } from "@nestjs/testing"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import {
@@ -44,13 +45,14 @@ const fixtureZip = pathToFileURL(
   ),
 ).href
 
-describe("RefreshService", () => {
-  let service: RefreshService
+describe("RefreshService (cron)", () => {
+  let registry: SchedulerRegistry
   let dataSource: DataSource
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       imports: [
+        ScheduleModule.forRoot(),
         TypeOrmModule.forRoot({
           type: "sqlite",
           database: ":memory:",
@@ -70,7 +72,9 @@ describe("RefreshService", () => {
       ],
     }).compile()
 
-    service = module.get(RefreshService)
+    await module.init()
+
+    registry = module.get(SchedulerRegistry)
     dataSource = module.get(DataSource)
   })
 
@@ -78,52 +82,21 @@ describe("RefreshService", () => {
     await dataSource.destroy()
   })
 
-  describe("run()", () => {
-    describe("Given a valid file:// ratesUrl", () => {
-      it("should upsert all parsed rows into the database", async () => {
-        await service.run()
+  describe("Given the module has initialised", () => {
+    it("should register a cron job named 'anubis.refresh'", () => {
+      const job = registry.getCronJob("anubis.refresh")
 
-        const repo = dataSource.getRepository(TestRate)
-        const rows = await repo.find()
+      expect(job).toBeDefined()
+    })
 
-        // 5 dates x 4 currencies = 20 rows
-        expect(rows).toHaveLength(20)
-      })
+    it("should use the cron expression '5 4 * * *'", () => {
+      const job = registry.getCronJob("anubis.refresh")
 
-      it("should set initialised to true", async () => {
-        expect(service.initialised).toBe(false)
-
-        await service.run()
-
-        expect(service.initialised).toBe(true)
-      })
-
-      it("should store correct rate data", async () => {
-        await service.run()
-
-        const repo = dataSource.getRepository(TestRate)
-        const row = await repo.findOneBy({
-          date: "2024-11-08",
-          currency: "USD",
-        })
-
-        expect(row).toMatchObject({
-          date: "2024-11-08",
-          currency: "USD",
-          rate: "1.0801",
-        })
-      })
-
-      it("should be idempotent — running twice does not duplicate rows", async () => {
-        await service.run()
-        await service.run()
-
-        const repo = dataSource.getRepository(TestRate)
-        const rows = await repo.find()
-
-        // Still 20 rows, not 40
-        expect(rows).toHaveLength(20)
-      })
+      // CronJob stores the cron time internally; we verify via the
+      // string representation of the next scheduled dates.
+      // The cronTime.source should be our cron expression.
+      const cronTime = (job as any).cronTime
+      expect(cronTime.source).toBe("5 4 * * *")
     })
   })
 })

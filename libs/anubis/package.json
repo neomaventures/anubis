@@ -39,6 +39,7 @@
   "peerDependencies": {
     "@nestjs/common": "11.x",
     "@nestjs/core": "11.x",
+    "@nestjs/schedule": "5.x",
     "@nestjs/typeorm": "11.x",
     "reflect-metadata": ">=0.2",
     "rxjs": ">=7",

@@ -1,4 +1,5 @@
 import { Inject, Injectable, Logger } from "@nestjs/common"
+import { Cron } from "@nestjs/schedule"
 import { DataSource, type Repository } from "typeorm"
 
 import {
@@ -71,5 +72,15 @@ export class RefreshService {
     this._initialised = true
 
     this.logger.log("Exchange rate sync complete")
+  }
+
+  /**
+   * Scheduled cron job that re-fetches and upserts exchange rates daily.
+   * Runs at 04:05 UTC to allow time for the ECB to publish new data.
+   */
+  @Cron("5 4 * * *", { name: "anubis.refresh", timeZone: "UTC" })
+  public async scheduledRefresh(): Promise<void> {
+    this.logger.log("Scheduled refresh triggered")
+    await this.run()
   }
 }
